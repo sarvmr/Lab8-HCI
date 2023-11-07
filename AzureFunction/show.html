@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <html>
+    <head>
+      <meta charset="utf-8" />
+      <title>CORS Client</title>
+    </head>
+    <body>
+      <h3>CORS Client</h3>
+      <button id="btnGetData">Get Data</button>
+      <pre id="preOutput"></pre>
+      <script>
+        const baseUrl = "http://localhost:7071";
+
+        var showResponse = function (object) {
+          document.querySelector("#preOutput").innerHTML = JSON.stringify(
+            object,
+            null,
+            4
+          );
+        };
+
+        const button = document.querySelector("#btnGetData");
+        button.addEventListener("click", (e) => {
+          getData();
+        });
+
+        var getData = async function () {
+          var url = baseUrl + "/api/students";
+
+          await fetch(url)
+            .then((response) => {
+              return response.json();
+            })
+            .then((data) => {
+              showResponse(data);
+            });
+
+          return false;
+        };
+      </script>
+    </body>
+  </html>
+</html>
